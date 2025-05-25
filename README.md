@@ -132,15 +132,12 @@ With more time, several improvements could be made:
 
 3. **Better Error Recovery**: Implement more sophisticated error recovery mechanisms to continue processing after encountering malformed records.
 
-4. **Command Line Interface**: Enhance the CLI with more options like validation-only mode, different output formats, or transaction batch sizes.
+4. **Performance Optimization**: Profile the code to identify bottlenecks and optimize core parsing functions.
 
-5. **Performance Optimization**: Profile the code to identify bottlenecks and optimize core parsing functions.
+5. **Schema Validation**: Add validation against a database schema to ensure data integrity before writing.
 
-6. **Schema Validation**: Add validation against a database schema to ensure data integrity before writing.
+6. **Parallel Processing**: Implement worker threads for parallel processing of large files divided into chunks.
 
-7. **Parallel Processing**: Implement worker threads for parallel processing of large files divided into chunks.
-
-8. **Monitoring and Logging**: Integrate structured logging and monitoring capabilities for production use.
 
 ### Q3: What is the rationale for the design choices that you have made?
 
