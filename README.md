@@ -105,3 +105,59 @@ New tests should be added in the `test` directory following the naming conventio
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📝 Technical Decisions and Rationale
+
+### Q1: What is the rationale for the technologies you have decided to use?
+
+The NEM12 parser project uses Node.js with the following rationale:
+
+1. **Stream Processing**: Node.js has built-in stream capabilities (`readline`, `fs`) that allow processing large files line by line without loading the entire file into memory, ideal for potentially large NEM12 files.
+
+2. **Event-driven Architecture**: The non-blocking I/O model in Node.js efficiently handles file reading and writing operations concurrently, improving performance for I/O-intensive tasks like file parsing.
+
+3. **JavaScript Ecosystem**: JavaScript provides rich data manipulation capabilities needed for transforming CSV data to SQL, with easy string manipulation and decent number handling.
+
+4. **Low Overhead**: The solution requires minimal third-party dependencies (only `yargs` for command-line argument parsing), reducing security risks and simplifying deployment.
+
+5. **Testing Framework**: Jest provides a comprehensive testing framework that allows for unit, integration, and coverage testing, ensuring code reliability.
+
+### Q2: What would you have done differently if you had more time?
+
+With more time, several improvements could be made:
+
+1. **Cloud Storage Integration**: Store CSV files in S3 or similar cloud storage and stream directly from there for better scalability and reliability.
+
+2. **Database Layer**: Add direct database connection instead of generating SQL files, allowing for immediate data loading and validation.
+
+3. **Better Error Recovery**: Implement more sophisticated error recovery mechanisms to continue processing after encountering malformed records.
+
+4. **Command Line Interface**: Enhance the CLI with more options like validation-only mode, different output formats, or transaction batch sizes.
+
+5. **Performance Optimization**: Profile the code to identify bottlenecks and optimize core parsing functions.
+
+6. **Schema Validation**: Add validation against a database schema to ensure data integrity before writing.
+
+7. **Parallel Processing**: Implement worker threads for parallel processing of large files divided into chunks.
+
+8. **Monitoring and Logging**: Integrate structured logging and monitoring capabilities for production use.
+
+### Q3: What is the rationale for the design choices that you have made?
+
+The design choices focus on reliability, efficiency, and maintainability:
+
+1. **Batching and Periodic Flush**: Processing data in configurable batches (via `BATCH_SIZE` and `SQL_CHUNK_SIZE`) prevents memory overflow and provides consistent performance regardless of file size.
+
+2. **Node.js Single-threaded Model**: Leverages Node.js's efficient garbage collection and event loop to avoid thread blocking on I/O operations. The single-threaded model with non-blocking I/O is perfect for this kind of I/O-bound task.
+
+3. **Stream Processing**: Line-by-line processing with `readline` interface allows handling arbitrarily large files without memory constraints.
+
+4. **Modular Functions**: The code separates concerns into discrete functions (`process300`, `process400`, `flushPending`, etc.) improving readability and testability.
+
+5. **Robust Error Handling**: Comprehensive error handling at multiple levels ensures that the process fails gracefully with informative messages.
+
+6. **Progress Reporting**: Regular progress updates for large files helps monitor long-running processes.
+
+7. **Configuration Variables**: Key parameters are defined as constants at the top of the file, making it easy to tune performance without modifying core logic.
+
+8. **Validation Checks**: The system validates header and footer records to ensure data integrity and complete processing.
