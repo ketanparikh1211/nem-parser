@@ -4,12 +4,22 @@
   "description": "High-performance NEM12 parser for Flo Energy tech assessment",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js --input ./data/input_nem12.csv --output ./data/output.sql"
+    "start": "node src/index.js --input ./data/input_nem12.csv --output ./data/output.sql",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "yargs": "^17.7.2"
   },
-  "keywords": ["NEM12", "parser", "flo-energy", "interval-meter", "sql"],
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "keywords": [
+    "NEM12",
+    "parser",
+    "flo-energy",
+    "interval-meter",
+    "sql"
+  ],
   "license": "MIT"
 }
-

@@ -73,38 +73,35 @@ The parser generates SQL insert statements for the `meter_readings` table with t
 - Reports detailed information about processing errors
 - Logs progress for large files
 
+## 🧪 Testing
+
+### Running Tests
+
+```bash
+npm test
+```
+
+### Test Coverage
+
+To generate test coverage reports:
+
+```bash
+npm run test:coverage
+```
+
+Tests are organized in the following categories:
+
+- **Unit Tests**: Tests for individual functions and components
+- **Integration Tests**: Tests for interactions between components
+- **Validation Tests**: Tests for input validation and error handling
+- **Performance Tests**: Tests for performance benchmarks
+
+### Adding Tests
+
+New tests should be added in the `test` directory following the naming convention:
+- Unit tests: `*.test.js`
+- Integration tests: `*.integration.test.js`
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📊 Tech Assessment Q&A
-
-### Q1. What is the rationale for the technologies you have decided to use?
-
-- **Node.js**: Chosen for its efficient non-blocking I/O operations and streaming capabilities, which are ideal for processing large files
-- **Built-in modules**: Using core `fs` and `readline` modules instead of third-party libraries to minimize dependencies
-- **Streaming approach**: Enables processing of very large files with minimal memory overhead
-- **Batch processing**: Optimizes memory usage and database performance by generating SQL in manageable chunks
-
-### Q2. What would you have done differently if you had more time?
-
-- Implement more thorough validation of NEM12 file format
-- Add unit and integration tests
-- Create configurable options via CLI arguments 
-- Add support for different output formats (e.g., CSV, JSON)
-- Implement parallel processing for multi-core systems
-- Add more detailed logging and monitoring
-- Create a web interface for file uploads and processing
-
-### Q3. What is the rationale for the design choices that you have made?
-
-- **Line-by-line processing**: Ensures memory efficiency even with files of arbitrary size
-- **Batch processing**: Balances memory usage and database performance
-- **Error handling**: Provides detailed error information for troubleshooting
-- **Progress reporting**: Gives visibility into processing status for large files
-- **Configurability**: Allows tuning for different file sizes and system capabilities
-- **Separation of concerns**: Clear functions for processing different record types
